@@ -1,0 +1,15 @@
+# .semaphore/semaphore.yml
+
+version: v1.0
+name: Your Node.js Project CI/CD Pipeline
+
+blocks:
+  - name: Build and Test
+    task:
+      jobs:
+        - name: Install Dependencies
+          commands:
+            - npm install
+        - name: Run Tests
+          commands:
+            - npm test
