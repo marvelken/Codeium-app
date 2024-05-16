@@ -1,7 +1,7 @@
 # .semaphore/semaphore.yml
 
 version: v1.0
-name: Your Node.js Project CI/CD Pipeline
+name: semaphorebuild
 
 agent:
   machine:
