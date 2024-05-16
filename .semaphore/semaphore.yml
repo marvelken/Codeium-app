@@ -3,6 +3,10 @@
 version: v1.0
 name: Your Node.js Project CI/CD Pipeline
 
+agent:
+  machine:
+    type: e1-standard-2
+
 blocks:
   - name: Build and Test
     task:
