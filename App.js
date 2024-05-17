@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 
 app.get('/', (req, res) => {
-  res.send('Hello, Semaphore, Lets Build, it failed the second time!');
+  res.send('Hello, Semaphore, Our build works Now!');
 });
 
 const PORT = process.env.PORT || 3000;
