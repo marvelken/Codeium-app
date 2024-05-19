@@ -6,17 +6,16 @@ agent:
     os_image: ubuntu2004
 
 blocks:
-  - name: 'Build and Test Node.js Application'
+  - name: "Build and Test Node.js Application"
     task:
       jobs:
-        - name: 'Install, Start and Test Node App'
+        - name: "Install, Start and Test Node App"
           commands:
             - checkout
             - echo "Installing dependencies..."
             - npm install
             - echo "Starting the Node.js application..."
-            - node app.js &
-            - echo "Waiting for the application to start..."
-            - sleep 5
+            - node app.js >app.log 2>&1 &
+            - echo "Waiting for the application to start..."         
             - echo "Testing if the application is up and running..."
             - curl localhost:3000
