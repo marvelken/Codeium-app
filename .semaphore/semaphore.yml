@@ -14,9 +14,10 @@ blocks:
             - checkout
             - echo "Installing dependencies..."
             - npm install
+            - echo "Starting the Node.js application..."
             - node app.js 
+            - echo "Waiting for the application to start..." 
             - sleep 5
-            - echo "Waiting for the application to start..."         
             - echo "Testing if the application is up and running..."
-            - curl -s http://localhost:3000/ | grep "Hello, Semaphore!"
+            - curl -s http://localhost:3000/ | grep "Hello, Semaphore, Our build works Now!!"
             - kill %1
