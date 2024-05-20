@@ -1,21 +1,22 @@
-version: v2.0
+
+version: v1.0
 name: MyPipeline
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu2004
-
 blocks:
-  - name: "Build and Test Node.js Application"
+  - name: 'Build and Test'
     task:
       jobs:
-        - name: "Install, Start and Test Node App"
+        - name: 'Build and Start App'
           commands:
             - checkout
             - echo "Installing dependencies..."
             - npm install
-            - echo "Starting the Node.js application..."
             - node app.js 
+            - sleep 5
             - echo "Waiting for the application to start..."         
             - echo "Testing if the application is up and running..."
-            - curl localhost:3000
+            - curl -s http://localhost:3000/ | grep "Hello, Semaphore!"
+            - kill %1
