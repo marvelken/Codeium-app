@@ -1,4 +1,4 @@
-version: v1.0
+version: v2.0
 name: MyPipeline
 agent:
   machine:
@@ -15,7 +15,7 @@ blocks:
             - echo "Installing dependencies..."
             - npm install
             - echo "Starting the Node.js application..."
-            - node app.js >app.log 2>&1 &
+            - node app.js 
             - echo "Waiting for the application to start..."         
             - echo "Testing if the application is up and running..."
             - curl localhost:3000
