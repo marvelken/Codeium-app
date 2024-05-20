@@ -4,7 +4,6 @@ name: MyPipeline
 agent:
   machine:
     type: e1-standard-2
-    os_image: ubuntu2004
 blocks:
   - name: 'Build and Test'
     task:
@@ -20,4 +19,4 @@ blocks:
             - sleep 5
             - echo "Testing if the application is up and running..."
             - curl -s http://localhost:3000/ | grep "Hello, Semaphore, Our build works Now!!"
-            - kill %1
+            - echo "Application is up and running!"
