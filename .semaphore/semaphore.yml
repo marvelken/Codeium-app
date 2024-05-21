@@ -15,7 +15,7 @@ blocks:
             - npm install
             - echo "Installing dependencies..."
             - ls -la
-            - node app.js 
+            - node .semaphore/app.js 
             - echo "Starting the Node.js application..."
             - echo "Waiting for the application to start..." 
             - echo "Testing if the application is up and running..."
