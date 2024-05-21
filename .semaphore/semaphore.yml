@@ -11,12 +11,12 @@ blocks:
         - name: 'Build and Start App'
           commands:
             - checkout
-            - echo "Installing dependencies..."
+            - echo "Installing Node.js..."
             - npm install
-            - echo "Starting the Node.js application..."
+            - echo "Installing dependencies..."
             - node app.js 
+            - echo "Starting the Node.js application..."
             - echo "Waiting for the application to start..." 
-            - sleep 5
             - echo "Testing if the application is up and running..."
             - curl -s http://localhost:3000/ | grep "Hello, Semaphore, Our build works Now!!"
             - echo "Application is up and running!"
