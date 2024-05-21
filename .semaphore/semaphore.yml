@@ -14,6 +14,7 @@ blocks:
             - echo "Installing Node.js..."
             - npm install
             - echo "Installing dependencies..."
+            - ls -la
             - node app.js 
             - echo "Starting the Node.js application..."
             - echo "Waiting for the application to start..." 
