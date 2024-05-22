@@ -1,23 +1,37 @@
-
 version: v1.0
-name: MyPipeline
+name: Node.js CI Pipeline
 agent:
   machine:
     type: e1-standard-2
+    os_image: ubuntu1804
+
 blocks:
-  - name: 'Build and Test'
+  - name: "Setup and Test"
     task:
+      env_vars:
+        - name: NODE_VERSION
+          value: "14.x"
+      prologue:
+        commands:
+          # Install Node.js
+          - sudo apt-get update && sudo apt-get install -y curl
+          - curl -sL https://deb.nodesource.com/setup_${NODE_VERSION} | sudo -E bash -
+          - sudo apt-get install -y nodejs
+          - node --version
+          - npm --version
+
+          # Install project dependencies
+          - npm install
+
       jobs:
-        - name: 'Build and Start App'
+        - name: "Run and Test Application"
           commands:
-            - checkout
-            - echo "Installing Node.js..."
-            - npm install
-            - echo "Installing dependencies..."
-            - bg node app.js 
-            - echo "Starting the Node.js application..."
-            - echo "Waiting for the application to start..."
-            - sleep 2
-            - echo "Testing if the application is up and running..."
+            # Start the service in the background
+            - node app.js &
+            # Wait for the server to start up properly
+            - sleep 5
+
+            # Test the service by querying the / route
             - curl -s http://localhost:3000/ 
-            - echo "Application is up and running!"
+
+            # Optionally, check the output or status code here if needed
