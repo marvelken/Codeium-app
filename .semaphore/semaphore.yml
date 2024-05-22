@@ -16,7 +16,7 @@ blocks:
             - echo "Installing dependencies..."
             - bg node app.js 
             - echo "Starting the Node.js application..."
-            - echo "Waiting for the application to start..." 
+            - echo "Waiting for the application to start..."
             - echo "Testing if the application is up and running..."
             - curl -s http://localhost:3000/ 
             - echo "Application is up and running!"
