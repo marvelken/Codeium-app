@@ -1,23 +1,23 @@
-
 version: v1.0
 name: MyPipeline
 agent:
   machine:
     type: e1-standard-2
+    os_image: ubuntu2004
 blocks:
-  - name: 'Build and Test'
+  - name: Build and Test
     task:
       jobs:
-        - name: 'Build and Start App'
+        - name: Build and Start App
           commands:
             - checkout
             - echo "Installing Node.js..."
             - npm install
             - echo "Installing dependencies..."
-            - bg node app.js 
+            - bg node app.js
             - echo "Starting the Node.js application..."
             - echo "Waiting for the application to start..."
             - sleep 2
             - echo "Testing if the application is up and running..."
-            - curl -s http://localhost:3000/ 
+            - 'curl -s http://localhost:3000/'
             - echo "Application is up and running!"
