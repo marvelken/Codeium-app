@@ -3,35 +3,38 @@ name: Node.js CI Pipeline
 agent:
   machine:
     type: e1-standard-2
-    os_image: ubuntu1804
+    os_image: ubuntu2004
 
 blocks:
-  - name: "Setup and Test"
+  - name: "Install Node.js and Dependencies"
     task:
-      env_vars:
-        - name: NODE_VERSION
-          value: "14.x"
       prologue:
         commands:
-          # Install Node.js
-          - sudo apt-get update && sudo apt-get install -y curl
-          - curl -sL https://deb.nodesource.com/setup_${NODE_VERSION} | sudo -E bash -
-          - sudo apt-get install -y nodejs
-          - node --version
-          - npm --version
-
-          # Install project dependencies
-          - npm install
-
+          # Install Node.js using NVM and set the desired version
+          - sem-version node 20.12.0
+          # Checkout the code from the repository
+          - checkout
       jobs:
-        - name: "Run and Test Application"
+        - name: "Install Dependencies"
+          commands:
+            # Install project dependencies and cache them
+            - cache restore node-modules-$(checksum package-lock.json)
+            - npm install
+            - cache store node-modules-$(checksum package-lock.json) node_modules
+
+  - name: "Run Tests"
+    task:
+      prologue:
+        commands:
+          # Checkout the code and restore cached dependencies
+          - checkout
+          - cache restore node-modules-$(checksum package-lock.json)
+      jobs:
+        - name: "Test Application"
           commands:
             # Start the service in the background
             - node app.js &
-            # Wait for the server to start up properly
-            - sleep 5  # Adjust this based on your server's startup time
-
-            # Test the service by querying the / route
-            - curl -s http://localhost:3000/  # Ensure your app is set to use the right port
-
-            # Optionally, check the output or status code here if needed
+            # Wait for the server to properly start
+            - sleep 5
+            # Perform a test by querying the '/' route
+            - curl -s http://localhost:3000/
