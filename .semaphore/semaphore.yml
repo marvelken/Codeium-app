@@ -29,9 +29,9 @@ blocks:
             # Start the service in the background
             - node app.js &
             # Wait for the server to start up properly
-            - sleep 5
+            - sleep 5  # Adjust this based on your server's startup time
 
             # Test the service by querying the / route
-            - curl -s http://localhost:3000/ 
+            - curl -s http://localhost:3000/  # Ensure your app is set to use the right port
 
             # Optionally, check the output or status code here if needed
